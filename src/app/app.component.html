@@ -1,4 +1,9 @@
 <app-finder></app-finder>
 <app-cities></app-cities>
+<ul>
+  <li class="text" *ngFor="let item of items | async">
+    {{item.name}}
+  </li>
+</ul>
 
 

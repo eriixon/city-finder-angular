@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Countries } from '../data-model';
-import { Finder } from '../data-model';
 import { CityService } from '../city.service';
 
 @Component({
@@ -13,9 +12,11 @@ import { CityService } from '../city.service';
 export class FinderComponent implements OnInit {
   cityForm: FormGroup;
   countries = Countries;
-  finder = new Finder('', '');
 
-  constructor(private fb: FormBuilder) { this.createForm(); }
+  constructor(
+    private fb: FormBuilder,
+    private cs: CityService
+  ) { this.createForm(); }
 
   createForm() {
     this.cityForm = this.fb.group({
@@ -25,7 +26,8 @@ export class FinderComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.finder);
+    this.cs.findCityes(this.cityForm.value);
+    this.createForm();
   }
 
   ngOnInit() { }
