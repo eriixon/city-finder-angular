@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Countries } from '../data-model';
 import { Finder } from '../data-model';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { CityService } from '../city.service';
 
 @Component({
@@ -10,20 +11,23 @@ import { CityService } from '../city.service';
   styleUrls: ['./finder.component.css']
 })
 export class FinderComponent implements OnInit {
+  cityForm: FormGroup;
   countries = Countries;
-  country = 'banana';
-
   finder = new Finder('', '');
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { this.createForm(); }
 
-
+  createForm() {
+    this.cityForm = this.fb.group({
+      city: ['', Validators.required],
+      country: ['', Validators.required]
+    });
+  }
 
   onSubmit() {
     console.log(this.finder);
   }
 
   ngOnInit() { }
-
 
 }
