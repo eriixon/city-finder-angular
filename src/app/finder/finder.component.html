@@ -1,3 +1,20 @@
-<p>
-  finder works!
-</p>
+<div class="container" id="spanel">
+  <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+    <div class="row">
+      <!-- <button type="submit" name="submit" class="btn btn-success" (click)="onSubmit(); cityForm.reset()">Submit</button> -->
+      <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
+      <div class="col">
+          <select class="form-control"  id="country" [(ngModel)]="finder.country" name="country" #country="ngModel" required>
+            <option *ngFor="let con of countries" [value]="con" >{{con}}</option>
+          </select>
+          <div [hidden]="country.valid || country.pristine" class="alert alert-danger">Country is required</div>
+      </div>
+      <div class="col">
+        <input type="text" class="form-control" id="city" placeholder="City" [(ngModel)]="finder.city" #city="ngModel">
+        <div [hidden]="city.valid || city.pristine" class="alert alert-danger"> Name is required </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+
