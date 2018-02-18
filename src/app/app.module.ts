@@ -10,6 +10,8 @@ import { FinderComponent } from './finder/finder.component';
 import { CityService } from './city.service';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
 import { environment } from '../environments/environment';
 
 
@@ -18,7 +20,7 @@ import { environment } from '../environments/environment';
     BrowserModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule, AngularFireDatabaseModule
   ],
   declarations: [AppComponent, CitiesComponent, CityComponent, FinderComponent],
   providers: [CityService],
