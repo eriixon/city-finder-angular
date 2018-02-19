@@ -1,3 +1,5 @@
-<p>
-  cities works!
-</p>
+<ul>
+  <li *ngFor="let item of items | async">
+     {{ item | json }}
+  </li>
+</ul>

@@ -1,31 +1,43 @@
 import { Injectable } from '@angular/core';
-import { FoundCity } from './data-model';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { FoundCity, Request } from './data-model';
 import { Observable } from 'rxjs/Observable';
+import { AngularFireDatabase } from 'angularfire2/database';
+
 
 @Injectable()
 export class CityService {
-  private cityList: FoundCity[];
+  // private cityList: FoundCity[];
   items: Observable<any[]>;
-  db: AngularFireDatabase;
 
+  constructor(private db: AngularFireDatabase) { }
 
-  findCityes(request: object) {
-    console.log(request.country);
-    console.log(this.db);
-    // this.items = this.db.list(request).valueChanges();
+  getItemsList(path: string): Observable<any[]> {
+    return this.db.list<FoundCity>(path).valueChanges();
   }
 
-  addCity(city: FoundCity) {
-    this.cityList.push(city);
+  makeRequest(r: Request) {
+    this.getItemsList(r.country).forEach(counry => {
+      Object.entries(counry).forEach(state => {
+        // console.log(state.length);
+        Object.entries(state).forEach(
+          ([key, value]) => console.log(value));
+        });
+    });
   }
 
-  deleteCity(city: FoundCity) {
-    this.cityList.splice(this.cityList.indexOf(city), 1);
-  }
+  lookUpCitis() { }
 
-  getCities() {
-    return this.cityList;
-  }
+
+  // addCity(city: FoundCity) {
+  //   this.cityList.push(city);
+  // }
+
+  // deleteCity(city: FoundCity) {
+  //   this.cityList.splice(this.cityList.indexOf(city), 1);
+  // }
+
+  // getCities() {
+  //   return this.cityList;
+  // }
 
 }

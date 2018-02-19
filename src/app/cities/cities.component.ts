@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-// import { AngularFirestore } from 'angularfire2/firestore';
+import { CityService } from '../city.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-cities',
@@ -7,8 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cities.component.css']
 })
 export class CitiesComponent implements OnInit {
-
-  constructor() { }
+  private cs: CityService;
 
   ngOnInit() {
   }

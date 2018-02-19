@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Countries } from '../data-model';
 import { CityService } from '../city.service';
+import { Observable } from 'rxjs/Observable';
+import { forEach } from '@firebase/util';
 
 @Component({
   selector: 'app-finder',
@@ -12,6 +14,8 @@ import { CityService } from '../city.service';
 export class FinderComponent implements OnInit {
   cityForm: FormGroup;
   countries = Countries;
+  items: Observable<any[]>;
+
 
   constructor(
     private fb: FormBuilder,
@@ -26,7 +30,7 @@ export class FinderComponent implements OnInit {
   }
 
   onSubmit() {
-    this.cs.findCityes(this.cityForm.value);
+    this.cs.makeRequest(this.cityForm.value);
     this.createForm();
   }
 

@@ -8,22 +8,13 @@ import { CityComponent } from './city/city.component';
 import { FinderComponent } from './finder/finder.component';
 
 import { CityService } from './city.service';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-
-import { environment } from '../environments/environment';
+import { FirebaseModule } from './firebase/firebase.module';
 
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule, AngularFireDatabaseModule
-  ],
-  declarations: [AppComponent, CitiesComponent, CityComponent, FinderComponent],
-  providers: [CityService],
-  bootstrap: [AppComponent]
+  imports: [ BrowserModule, ReactiveFormsModule, FirebaseModule ],
+  declarations: [ AppComponent, CitiesComponent, CityComponent, FinderComponent ],
+  providers: [ CityService ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
