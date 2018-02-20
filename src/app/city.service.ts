@@ -1,43 +1,48 @@
 import { Injectable } from '@angular/core';
-import { FoundCity, Request } from './data-model';
+import { FoundCity, Request, CityList } from './data-model';
 import { Observable } from 'rxjs/Observable';
-import { AngularFireDatabase } from 'angularfire2/database';
-
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 @Injectable()
 export class CityService {
-  // private cityList: FoundCity[];
-  items: Observable<any[]>;
+  cityList: FoundCity[] = [];
 
-  constructor(private db: AngularFireDatabase) { }
-
-  getItemsList(path: string): Observable<any[]> {
-    return this.db.list<FoundCity>(path).valueChanges();
-  }
+  constructor(
+    private db: AngularFireDatabase,
+  ) { }
 
   makeRequest(r: Request) {
-    this.getItemsList(r.country).forEach(counry => {
-      Object.entries(counry).forEach(state => {
-        // console.log(state.length);
-        Object.entries(state).forEach(
-          ([key, value]) => console.log(value));
-        });
+    this.getCountryList(r.country).forEach(counry => this.lookUpCitis(counry, r.city));
+  }
+
+  getCountryList(path: string): Observable<any[]> {
+    return this.db.list(path).valueChanges();
+  }
+
+  lookUpCitis(states: object[], rcity: string) {
+    states.forEach(state => {
+      Object.values(state).forEach(element => {
+        if (element.hasOwnProperty('Name') && element['Name'] === rcity) {
+          this.addCityToList(element);
+        } else {
+          Object.values(element).forEach(subelement => {
+            if (subelement.hasOwnProperty('Name') && subelement['Name']  === rcity) {
+              this.addCityToList(element);
+            }
+          });
+        }
+      });
     });
   }
 
-  lookUpCitis() { }
+  addCityToList(city: FoundCity) {
+    console.log (city);
+    this.cityList.push(city);
+  }
 
-
-  // addCity(city: FoundCity) {
-  //   this.cityList.push(city);
-  // }
-
-  // deleteCity(city: FoundCity) {
-  //   this.cityList.splice(this.cityList.indexOf(city), 1);
-  // }
-
-  // getCities() {
-  //   return this.cityList;
-  // }
-
+  deleteCity(city: FoundCity) {
+    this.cityList.splice(this.cityList.indexOf(city), 1);
+  }
 }
+
+
