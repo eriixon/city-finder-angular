@@ -1,2 +1,5 @@
-
-<app-city *ngFor="let city of cs.cityList"></app-city>
+<div class="mat-app-background basic-container">
+    <div class='md-padding' layout="row" layout-wrap>
+        <app-city *ngFor="let city of cs.cityList" [city]='city'></app-city>
+    </div>
+</div>
