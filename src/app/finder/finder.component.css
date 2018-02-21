@@ -2,16 +2,20 @@
   margin-top: 10%;
 }
 
-.ng-valid[required],
-.ng-valid.required {
-  border-left: 5px solid #42a948; /* green */
+.finder-container {
+  display: flex;
+  flex-direction: column;
 }
 
-.ng-invalid:not(form) {
-  border-left: 5px solid #a94442; /* red */
+.finder-container > * {
+  width: 80%;
+}
+.finder-full-width {
+  width: 95%;
 }
 
-.btn.btn-success{
-  height: 38px;
-  width: 114px;
+.mat-app-background {
+  width: 80%;
+  margin-left: 10%;
+  background-color: rgba(250, 250, 250, 0.8)
 }

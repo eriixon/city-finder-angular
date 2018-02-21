@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { Countries } from '../data-model';
-import { CityService } from '../city.service';
+import { Countries } from '../services/data-model';
+import { CityService } from '../services/city.service';
 import { Observable } from 'rxjs/Observable';
-import { forEach } from '@firebase/util';
+import {
+  MatButtonModule,
+  MatInputModule,
+  MatCardModule,
+  MatSelectModule
+} from '@angular/material';
 
 @Component({
   selector: 'app-finder',
@@ -30,6 +34,7 @@ export class FinderComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.cityForm.value);
     this.cs.makeRequest(this.cityForm.value);
     this.createForm();
   }

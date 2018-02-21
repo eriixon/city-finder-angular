@@ -1,3 +1,8 @@
-<p>
-  city works!
-</p>
+<div *ngIf="city">
+    <h2>{{ city.city | uppercase }} Details</h2>
+    <p> {{ city.country }}</p>
+    <p> {{ city.county }}</p>
+    <p> {{ city.state }}</p>
+    <p>Banana</p>
+    <button (click)="save()">Delete</button>
+</div>
