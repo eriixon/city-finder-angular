@@ -8,6 +8,7 @@ import { FinderComponent } from './finder/finder.component';
 import { CityService } from './services/city.service';
 import { FirebaseModule } from './services/firebase.module';
 import { MaterialModule } from './services/material.module';
+import { SafeUrlPipe } from './services/safe-url.pipe';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { MaterialModule } from './services/material.module';
     AppComponent,
     CitiesComponent,
     CityComponent,
-    FinderComponent
+    FinderComponent,
+    SafeUrlPipe
   ],
   providers: [CityService],
   bootstrap: [AppComponent]

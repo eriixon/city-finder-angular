@@ -1,54 +1,24 @@
 <div *ngIf="city">
-    <mat-card>
-        <!-- <img mat-card-image></img> -->
+    <mat-card tabindex="1" role="group">
+        <div>
+            <iframe width="100%" height="auto" frameborder="0" style="border:0" [src]="city | safeUrl" allowfullscreen></iframe>
+        </div>
         <mat-card-title>{{ city.city }}</mat-card-title>
         <mat-card-content>
-            <p>County: {{ city.county }}</p>
-            <p>Municipality: {{ city.Municipality }}</p>
-            <p>State: {{ city.state }}</p>
+            <p *ngIf="city.county">County: {{ city.county }}</p>
+            <p *ngIf="city.municipality">Municipality: {{ city.Municipality }}</p>
+            <p >State: {{ city.state }}</p>
             <p>Country: {{ city.country }}</p>
         </mat-card-content>
         <mat-card-actions layout="row" layout-align="end center">
-            <button (click)="save()">Delete</button>
+            <a [href]="city | safeUrl" target="_blank">
+                <button mat-button><i class="material-icons blue-btn">dashboard</i></button>
+            </a>
+            <a [href]="city | safeUrl" target="_blank">
+                <button mat-button><i class="material-icons green-btn">location_city</i></button>
+            </a>
+            <button mat-button (click)="deleteCity()"><i class="material-icons red-btn">delete</i></button>
         </mat-card-actions>
     </mat-card>
 </div>
 
-<!-- <template>
-        <div class="ui card">
-            <div class="image">
-                <iframe width="100%" height="auto" frameborder="0" style="border:0" :src="city.mapLink" allowfullscreen></iframe>
-            </div>
-            <div class="content" style="margin-left: 40px;">
-                <p class="header">{{city.City}}</p>
-                <div class="description">
-                    <p v-if="city.County">County: {{city.County}}</p>
-                    <p v-if="city.Municipality">Municipality: {{city.Municipality}}</p>
-                    <p>State: {{city.State}}</p>
-                    <p>Country: {{city.Country}}</p>
-                </div>
-            </div>
-            <div class="extra content">
-                <div class="ui buttons">
-                    <a :href="city.wiki" target="_blank" class="cardLink">
-                        <div class="ui vertical animated blue basic button cardLink" tabindex="0">
-                            <div class="hidden content">Wikipedia</div>
-                            <div class="visible content"><i class="wikipedia icon"></i></div>
-                        </div>
-                    </a>
-                    <a :href="city.citydata" target="_blank" class="cardLink">
-                        <div class="ui vertical animated green basic button cardLink" tabindex="0">
-                            <div class="hidden content">City-Data</div>
-                            <div class="visible content"><i class="building outline icon"></i></div>
-                        </div>
-                    </a>
-                    <a class='trash icon' @click="deleteCity(city)">
-                        <div class="ui vertical animated red basic button" tabindex="0">
-                            <div class="hidden content">Delete</div>
-                            <div class="visible content"><i class='trash icon'></i></div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </template> -->

@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { FoundCity, Request, CityList } from './data-model';
+import { FoundCity, Request } from './data-model';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { of } from 'rxjs/observable/of';
 
-
 @Injectable()
 export class CityService {
   public cityList: FoundCity[] = [];
-  private fc: FoundCity;
 
-  constructor( private db: AngularFireDatabase ) { }
+  constructor(
+    private db: AngularFireDatabase,
+  ) { }
 
   makeRequest(r: Request) {
     this.getCountryList(r.country).forEach(counry => this.lookUpCitis(counry, r));
@@ -24,25 +24,17 @@ export class CityService {
     states.forEach(state => {
       Object.values(state).forEach(element => {
         if (element.hasOwnProperty('Name') && element['Name'] === req.city) {
-          this.fc = new FoundCity();
-          this.fc.city = element['Name'];
-          this.fc.state = element['State'];
-          this.fc.county = '';
-          this.fc.municipality = '';
-          this.fc.country = req.country;
-          this.addCityToList(this.fc);
-          this.fc = new FoundCity();
+          this.createCityElement(
+            element['Name'], '', '',
+            element['State'], req.country);
         } else {
           Object.values(element).forEach(subelement => {
             if (subelement.hasOwnProperty('Name') && subelement['Name']  === req.city) {
-              this.fc = new FoundCity();
-              this.fc.city = subelement['Name'];
-              this.fc.county = subelement['County'] ? subelement['County'] : '';
-              this.fc.municipality = subelement['Municipality'] ? subelement['Municipality'] : '';
-              this.fc.state = subelement['State'];
-              this.fc.country = req.country;
-              this.addCityToList(this.fc);
-              this.fc = new FoundCity();
+              this.createCityElement(
+                subelement['Name'],
+                subelement['County'] ? subelement['County'] : '',
+                subelement['Municipality'] ? subelement['Municipality'] : '',
+                subelement['State'], req.country);
             }
           });
         }
@@ -50,9 +42,9 @@ export class CityService {
     });
   }
 
-  addCityToList(city: FoundCity) {
-    this.cityList.push(city);
-    console.log(this.cityList);
+  createCityElement(city: string,  county: string, municipality: string, state: string, country: string ) {
+    const fc = new FoundCity(city, county, municipality, state, country, 0);
+    this.cityList.push(fc);
   }
 
   deleteCity(city: FoundCity) {
@@ -60,5 +52,3 @@ export class CityService {
   }
 
 }
-
-

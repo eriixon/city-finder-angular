@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FoundCity } from '../services/data-model';
+import { IFoundCity } from '../services/data-model';
 import { CityService } from '../services/city.service';
+import { Pipe, PipeTransform } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-city',
@@ -9,9 +11,8 @@ import { CityService } from '../services/city.service';
   providers: [CityService]
 })
 export class CityComponent implements OnInit {
-  @Input() city: FoundCity;
+  @Input() city: IFoundCity;
 
-  constructor(public cs: CityService) { }
+  constructor( public cs: CityService ) { }
   ngOnInit() {}
-
 }

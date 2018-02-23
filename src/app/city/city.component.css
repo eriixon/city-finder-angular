@@ -1,4 +1,30 @@
 .mat-card{
-    width: 300px;
-    height: auto;
+    width: 258px;
+    height: a384px;
+    margin: 5px;
+    float: left;
+    background-color: #BBDEFB;
+}
+.mat-card:hover{
+    background-color: #fff;
+}
+iframe {
+    margin: -24px -24px 16px -24px;
+    width: calc(100% + 48px);
+}
+mat-card-content, mat-card-title {
+    padding-left: 25px;
+}
+
+.material-icons.blue-btn{
+    color: #1E88E5;
+}
+.material-icons.green-btn {
+    color: #43A047;
+}
+.material-icons.red-btn {
+    color: #E53935;
+}
+a {
+    text-decoration: none;
 }

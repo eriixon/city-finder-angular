@@ -34,7 +34,6 @@ export class FinderComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.cityForm.value);
     this.cs.makeRequest(this.cityForm.value);
     this.createForm();
   }
