@@ -1,6 +1,6 @@
 .mat-card{
     width: 258px;
-    height: a384px;
+    height: 306px;
     margin: 5px;
     float: left;
     background-color: #BBDEFB;
@@ -12,8 +12,13 @@ iframe {
     margin: -24px -24px 16px -24px;
     width: calc(100% + 48px);
 }
+
 mat-card-content, mat-card-title {
     padding-left: 25px;
+}
+
+mat-card-content {
+    height: 76px;
 }
 
 .material-icons.blue-btn{

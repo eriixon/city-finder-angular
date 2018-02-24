@@ -1,5 +1,5 @@
 <div class="mat-app-background basic-container">
     <div class='md-padding' layout="row" layout-wrap>
-        <app-city *ngFor="let city of cs.cityList" [city]='city'></app-city>
+        <app-city *ngFor="let city of cs.cityList" [city]='city' (remove)="onDeleteCity($event)"></app-city>
     </div>
 </div>

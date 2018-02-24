@@ -17,7 +17,7 @@
             <a [href]="city | safeUrl" target="_blank">
                 <button mat-button><i class="material-icons green-btn">location_city</i></button>
             </a>
-            <button mat-button (click)="deleteCity()"><i class="material-icons red-btn">delete</i></button>
+            <button mat-button (click)="deleteCity(city)"><i class="material-icons red-btn">delete</i></button>
         </mat-card-actions>
     </mat-card>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { IFoundCity } from '../services/data-model';
 import { CityService } from '../services/city.service';
 import { Pipe, PipeTransform } from '@angular/core';
@@ -10,9 +10,16 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./city.component.css'],
   providers: [CityService]
 })
-export class CityComponent implements OnInit {
+export class CityComponent {
   @Input() city: IFoundCity;
 
   constructor( public cs: CityService ) { }
-  ngOnInit() {}
+
+  @Output()
+  remove: EventEmitter<IFoundCity> = new EventEmitter();
+
+  deleteCity(city: any): void {
+    this.remove.emit(city);
+  }
+
 }

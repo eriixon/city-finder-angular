@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { of } from 'rxjs/observable/of';
 
+
 @Injectable()
 export class CityService {
   public cityList: FoundCity[] = [];
@@ -13,7 +14,9 @@ export class CityService {
   ) { }
 
   makeRequest(r: Request) {
-    this.getCountryList(r.country).forEach(counry => this.lookUpCitis(counry, r));
+    this.getCountryList(r.country).forEach(counry => {
+      this.lookUpCitis(counry, r);
+    });
   }
 
   getCountryList(path: string): Observable<any[]> {
@@ -46,9 +49,4 @@ export class CityService {
     const fc = new FoundCity(city, county, municipality, state, country, 0);
     this.cityList.push(fc);
   }
-
-  deleteCity(city: FoundCity) {
-    this.cityList.splice(this.cityList.indexOf(city), 1);
-  }
-
 }

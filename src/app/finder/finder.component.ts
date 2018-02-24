@@ -23,7 +23,7 @@ export class FinderComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private cs: CityService
+    private cs: CityService,
   ) { this.createForm(); }
 
   createForm() {

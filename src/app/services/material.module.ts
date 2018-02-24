@@ -4,6 +4,7 @@ import {
   MatInputModule,
   MatCardModule,
   MatSelectModule,
+  MatDialogModule,
   MatGridListModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -14,6 +15,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatInputModule,
     MatCardModule,
     MatSelectModule,
+    MatDialogModule,
     MatGridListModule,
     BrowserAnimationsModule
   ],
@@ -23,6 +25,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatCardModule,
     MatSelectModule,
     MatGridListModule,
+    MatDialogModule,
     BrowserAnimationsModule
   ]
 })
