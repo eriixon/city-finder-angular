@@ -9,6 +9,8 @@ import { CityService } from './services/city.service';
 import { FirebaseModule } from './services/firebase.module';
 import { MaterialModule } from './services/material.module';
 import { SafeUrlPipe } from './services/safe-url.pipe';
+import { PopupDialogComponent } from './dialogs/popup-dialog.component';
+import { ErrorDialogComponent } from './dialogs/error-dialog.component';
 
 @NgModule({
   imports: [
@@ -22,9 +24,12 @@ import { SafeUrlPipe } from './services/safe-url.pipe';
     CitiesComponent,
     CityComponent,
     FinderComponent,
-    SafeUrlPipe
+    SafeUrlPipe,
+    PopupDialogComponent,
+    ErrorDialogComponent,
   ],
   providers: [CityService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ PopupDialogComponent, ErrorDialogComponent ]
 })
 export class AppModule {}

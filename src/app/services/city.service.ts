@@ -1,21 +1,33 @@
 import { Injectable } from '@angular/core';
-import { FoundCity, Request } from './data-model';
+import { IFoundCity, FoundCity, Request } from './data-model';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { of } from 'rxjs/observable/of';
+import { MatButtonModule, MatInputModule, MatCardModule, MatSelectModule, MatDialog } from '@angular/material';
+import { PopupDialogComponent } from '../dialogs/popup-dialog.component';
+import { ErrorDialogComponent } from '../dialogs/error-dialog.component';
 
 
 @Injectable()
 export class CityService {
   public cityList: FoundCity[] = [];
+  private isCityFound = false;
+
 
   constructor(
     private db: AngularFireDatabase,
+    public dialog: MatDialog
   ) { }
 
   makeRequest(r: Request) {
+    const lookDialogRef = this.dialog.open(PopupDialogComponent, { height: '250px', width: '400px' });
     this.getCountryList(r.country).forEach(counry => {
-      this.lookUpCitis(counry, r);
+      const foundCities = this.lookUpCitis(counry, r);
+      this.cityList = this.cityList.concat(foundCities);
+      lookDialogRef.close();
+      if ( foundCities.length === 0) {
+        const ErrorDialogRef = this.dialog.open(ErrorDialogComponent, { height: '250px', width: '400px'});
+      }
     });
   }
 
@@ -23,30 +35,25 @@ export class CityService {
     return this.db.list(path).valueChanges();
   }
 
-  lookUpCitis(states: object[], req: Request) {
+  lookUpCitis(states: object[], req: Request): IFoundCity[] {
+    const foundCities: FoundCity[] = [];
     states.forEach(state => {
       Object.values(state).forEach(element => {
         if (element.hasOwnProperty('Name') && element['Name'] === req.city) {
-          this.createCityElement(
-            element['Name'], '', '',
-            element['State'], req.country);
+          const fc = new FoundCity(element['Name'], '', '', element['State'], req.country, 0);
+          foundCities.push(fc);
         } else {
           Object.values(element).forEach(subelement => {
             if (subelement.hasOwnProperty('Name') && subelement['Name']  === req.city) {
-              this.createCityElement(
-                subelement['Name'],
-                subelement['County'] ? subelement['County'] : '',
-                subelement['Municipality'] ? subelement['Municipality'] : '',
-                subelement['State'], req.country);
+              const c = subelement['County'] ? subelement['County'] : '';
+              const m = subelement['Municipality'] ? subelement['Municipality'] : '';
+              const fc = new FoundCity(subelement['Name'], c, m, subelement['State'], req.country, 0);
+              foundCities.push(fc);
             }
           });
         }
       });
     });
-  }
-
-  createCityElement(city: string,  county: string, municipality: string, state: string, country: string ) {
-    const fc = new FoundCity(city, county, municipality, state, country, 0);
-    this.cityList.push(fc);
+    return foundCities;
   }
 }

@@ -4,10 +4,11 @@ import {
   MatInputModule,
   MatCardModule,
   MatSelectModule,
-  MatDialogModule,
   MatGridListModule
 } from '@angular/material';
+import {MatDialogModule} from '@angular/material/dialog';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatSelectModule,
     MatDialogModule,
     MatGridListModule,
+    MatProgressSpinnerModule,
     BrowserAnimationsModule
   ],
   exports: [
@@ -26,6 +28,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatSelectModule,
     MatGridListModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
     BrowserAnimationsModule
   ]
 })

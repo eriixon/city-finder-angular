@@ -1,0 +1,12 @@
+.mat-dialog-content.progress {
+    height: 150px;
+    width: 150px;
+    margin-left: 100px;
+}
+.material-icons.error {
+    font-size: 8em;
+    color: #E53935;
+}
+.dialogx {
+    text-align: center;
+}

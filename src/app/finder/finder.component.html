@@ -1,21 +1,25 @@
 <div class="mat-app-background basic-container">
-  <form class="finder-container" [formGroup]="cityForm" (ngSubmit)="onSubmit()" novalidate>
+  <form class="finder-container" [formGroup]="cityForm" (ngSubmit)="onSubmit()">
     <mat-grid-list cols="3" rowHeight="10:3">
       <mat-grid-tile>
         <button mat-icon-button aria-label='Search' type="submit"><i class="material-icons">search</i></button>
       </mat-grid-tile>
       <mat-grid-tile>
         <mat-form-field class="finder-full-width">
-          <mat-select placeholder="Select Country" formControlName="country">
+          <mat-select placeholder="Select Country" formControlName="country" required>
             <mat-option *ngFor="let con of countries" [value]="con"> {{ con }} </mat-option>
           </mat-select>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile>
-        <mat-form-field class="finder-full-width">
-          <input matInput type="text" placeholder="City" formControlName="city" autocomplete="off">
+        <mat-form-field class="finder-full-width" [ngClass]="{'error': cityForm.controls['city'].errors && !cityForm.controls['city'].pristine}" dividerColor="{{cityForm.controls['city'].errors && !cityForm.controls['city'].pristine ? 'warn' : 'primary'}}">
+          <input matInput type="text" placeholder="City" formControlName="city" autocomplete="off" required>
+          <div *ngIf="cityForm.controls['city'].errors && !cityForm.controls['city'].pristine" class="error-msg">
+              <div [hidden]="!cityForm.controls['city'].errors.required">Email is required.</div>
+              <div [hidden]="!cityForm.controls['city'].errors.patternInvalid">Email is invalid.</div>
+            </div>
         </mat-form-field>
-      </mat-grid-tile>      
+      </mat-grid-tile>
     </mat-grid-list>
   </form>
 </div>
