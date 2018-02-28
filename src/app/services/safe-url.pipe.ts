@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DomSanitizer} from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { IFoundCity } from '../services/data-model';
 
 @Pipe({ name: 'safeUrl' })
@@ -8,8 +8,7 @@ export class SafeUrlPipe implements PipeTransform {
   private wikiLink = 'https://en.wikipedia.org/wiki/';
   private citydataLink = 'http://www.city-data.com/city/';
 
-
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor(private sanitizer: DomSanitizer) {}
   transform(city: IFoundCity) {
     if (city.links === 0) {
       const link = `${this.mapLink}${city.country}+${city.state}+${city.city}`;

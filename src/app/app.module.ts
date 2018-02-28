@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -13,23 +14,19 @@ import { PopupDialogComponent } from './dialogs/popup-dialog.component';
 import { ErrorDialogComponent } from './dialogs/error-dialog.component';
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    FirebaseModule,
-    MaterialModule
-  ],
+  imports: [BrowserModule, ReactiveFormsModule, FirebaseModule, MaterialModule],
   declarations: [
     AppComponent,
+    FinderComponent,
     CitiesComponent,
     CityComponent,
-    FinderComponent,
     SafeUrlPipe,
     PopupDialogComponent,
-    ErrorDialogComponent,
+    ErrorDialogComponent
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [CityService],
   bootstrap: [AppComponent],
-  entryComponents: [ PopupDialogComponent, ErrorDialogComponent ]
+  entryComponents: [PopupDialogComponent, ErrorDialogComponent]
 })
 export class AppModule {}
