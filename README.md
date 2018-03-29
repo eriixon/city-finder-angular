@@ -11,7 +11,7 @@ This light web application can help to find information about a city ot town jus
 ## How to use
 * Chose the country - USA, Canada or Mexico
 * Fill down the name of the city and click the button
-* Try in at https://city-find.herokuapp.com/
+* Try in at https://findcity.herokuapp.com/
 
 ## Technologies
 * JavaScript Framework - Angular with TypeScript
